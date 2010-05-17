@@ -1,0 +1,280 @@
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://maven.apache.org/POM/4.0.0
+            http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.jtheque</groupId>
+    <artifactId>org.jtheque.xml.utils</artifactId>
+    <packaging>bundle</packaging>
+    <name>org.jtheque.xml.utils</name>
+    <version>1.0-SNAPSHOT</version>
+
+    <scm>
+        <url>http://wichtounet.homedns.org/svn/jtheque-xml-utils/</url>
+        <connection>scm:svn:http://wichtounet.homedns.org/svn/jtheque-xml-utils/trunk/</connection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>Server-PC-releases</id>
+            <name>Server-PC-releases</name>
+            <url>http://wichtounet.homedns.org:8280/artifactory/libs-releases-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>Server-PC-snapshots</id>
+            <name>Server-PC-snapshots</name>
+            <url>http://wichtounet.homedns.org:8280/artifactory/libs-snapshots-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <directory>${env.BUILD_HOME}/utils/jtheque-xml-utils</directory>
+
+        <outputDirectory>${env.BUILD_HOME}/utils/jtheque-xml-utils/classes/production</outputDirectory>
+        <testOutputDirectory>${env.BUILD_HOME}/utils/jtheque-xml-utils/classes/test</testOutputDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>org.jtheque.xml.utils</Export-Package>
+                        <Bundle-Vendor>Baptiste Wicht</Bundle-Vendor>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>bundle-project-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>src</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <bottom>
+                        <![CDATA[Copyright © {inceptionYear}-{currentYear} {organizationName}. All Rights Reserved.
+                        <script type="text/javascript">
+                        document.write(unescape(\"%3Cscript src='http://www.google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));
+                        </script>
+                        <script type=\"text/javascript\">
+                        try {
+                        var pageTracker = _gat._getTracker(\"UA-2175227-4\");
+                        pageTracker._trackPageview();
+                        } catch(err) {}</script>]]>
+                    </bottom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>bundle-project-javadoc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                  <locales>fr,en</locales>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <configuration>
+                    <tag>${BUILD_NUMBER}</tag>
+                    <tagBase>http://wichtounet.homedns.org/svn/jtheque-xml-utils/continuous/</tagBase>
+                    <username>wichtounet</username>
+                    <password>${svn.password}</password>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>1.0-beta-5</version>
+            </extension>
+        </extensions>
+    </build>
+
+    <reporting>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <targetJdk>${java.version}</targetJdk>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </reporting>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jtheque</groupId>
+            <artifactId>org.jtheque.utils</artifactId>
+            <version>1.1.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>org.jtheque.jdom</artifactId>
+                <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>org.jtheque.xercesImpl</artifactId>
+                <version>2.9.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>org.jtheque.saxpath</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>org.jtheque.jaxen-core</artifactId>
+                <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>org.jtheque.jaxen-jdom</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <licenses>
+        <license>
+            <name>GNU GPL V3</name>
+            <url>http://www.gnu.org/copyleft/gpl.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>JTheque</name>
+        <url>http://jtheque.developpez.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>wichtounet</id>
+            <name>Baptiste Wicht</name>
+            <email>baptistewicht@gmail.com</email>
+            <url>http://baptiste-wicht.developpez.com</url>
+            <organization>http://baptiste-wicht.developpez.com</organization>
+            <organizationUrl>http://baptiste-wicht.developpez.com</organizationUrl>
+
+            <roles>
+                <role>Administrateur</role>
+                <role>Développeur</role>
+            </roles>
+
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- File encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Versions -->
+        <java.version>1.6</java.version>
+
+        <!-- Sonar -->
+        <sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
+        <sonar.cpd.minimumTokens>50</sonar.cpd.minimumTokens>
+    </properties>
+
+</project>
