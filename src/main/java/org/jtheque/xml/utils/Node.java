@@ -77,7 +77,7 @@ public final class Node {
      *
      * @return A List containing all the Node children.
      */
-    public Iterable<Node> getChildrens() {
+    public Collection<Node> getChildrens() {
         return childrens;
     }
 
