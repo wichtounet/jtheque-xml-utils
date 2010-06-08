@@ -1,12 +1,17 @@
 package org.jtheque.xml.utils;
 
+import org.jtheque.utils.io.FileUtils;
+
 import org.jdom.Document;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.jtheque.utils.io.FileUtils;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /*
  * Copyright JTheque (Baptiste Wicht)
@@ -44,7 +49,7 @@ public final class XMLUtils {
      * @param path The path to the file.
      */
     public static void writeXml(Document doc, String path) {
-        XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+        XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 
         boolean fileOk = true;
 
@@ -64,7 +69,7 @@ public final class XMLUtils {
             try {
                 stream = new FileOutputStream(path);
 
-                sortie.output(doc, stream);
+                outputter.output(doc, stream);
             } catch (FileNotFoundException e) {
                 LoggerFactory.getLogger(XMLUtils.class).error(e.getMessage(), e);
             } catch (IOException e) {
