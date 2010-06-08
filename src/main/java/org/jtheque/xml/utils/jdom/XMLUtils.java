@@ -1,4 +1,4 @@
-package org.jtheque.xml.utils;
+package org.jtheque.xml.utils.jdom;
 
 import org.jtheque.utils.io.FileUtils;
 

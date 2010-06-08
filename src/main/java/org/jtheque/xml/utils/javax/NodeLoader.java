@@ -1,6 +1,8 @@
 package org.jtheque.xml.utils.javax;
 
-import org.w3c.dom.Element;
+import org.jtheque.xml.utils.Node;
+import org.jtheque.xml.utils.NodeAttribute;
+
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
@@ -34,10 +36,10 @@ public final class NodeLoader {
      * @param nodes The nodes to transform to Node.
      * @return A List containing all the resolved Node.
      */
-    public static Collection<Node> resolveNodeStates(Collection<Element> nodes) {
+    public static Collection<Node> resolveNodeStates(Collection<org.w3c.dom.Node> nodes) {
         Collection<Node> nodeStates = new ArrayList<Node>(nodes.size());
 
-        for (Element element : nodes) {
+        for (org.w3c.dom.Node element : nodes) {
             Node node = resolve(element);
 
             nodeStates.add(node);

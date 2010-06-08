@@ -1,8 +1,14 @@
 package org.jtheque.xml.utils.javax;
 
-import org.jdom.CDATA;
-import org.jdom.Document;
-import org.jdom.Element;
+import org.jtheque.xml.utils.XMLException;
+
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 /*
  * Copyright JTheque (Baptiste Wicht)
@@ -35,12 +41,22 @@ public final class XMLWriter {
      *
      * @param root The name of the root element.
      */
-    public XMLWriter(String root) {
+    public XMLWriter(String root){
         super();
 
-        document = new Document(new Element(root));
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-        current = getRoot();
+        try {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            DOMImplementation impl = builder.getDOMImplementation();
+
+            document = impl.createDocument(null, root, null);
+
+            current = document.getDocumentElement();
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException("Unable to create the document");
+        }
     }
 
     /**
@@ -49,9 +65,9 @@ public final class XMLWriter {
      * @param element The element to add.
      */
     public void add(String element) {
-        Element newElement = new Element(element);
+        Element newElement = document.createElement(element);
 
-        current.addContent(newElement);
+        current.appendChild(newElement);
 
         current = newElement;
     }
@@ -65,7 +81,7 @@ public final class XMLWriter {
     public void add(String element, String text) {
         add(element);
 
-        current.setText(text);
+        current.setTextContent(text);
     }
 
     /**
@@ -75,19 +91,11 @@ public final class XMLWriter {
      * @param text    The text of the element.
      */
     public void addOnly(String element, String text) {
-        Element newElement = new Element(element);
+        Element newElement = document.createElement(element);
 
-        newElement.setText(text);
+        newElement.setTextContent(text);
 
-        current.addContent(newElement);
-    }
-
-    public void addOnlyWithCDATA(String element, String text) {
-        Element newElement = new Element(element);
-
-        newElement.setContent(new CDATA(text));
-
-        current.addContent(newElement);
+        current.appendChild(newElement);
     }
 
     /**
@@ -116,7 +124,7 @@ public final class XMLWriter {
      * @return The root element of the document.
      */
     public Element getRoot() {
-        return document.getRootElement();
+        return document.getDocumentElement();
     }
 
     /**
@@ -141,6 +149,6 @@ public final class XMLWriter {
      * Switch to parent.
      */
     public void switchToParent() {
-        current = current.getParentElement();
+        current = (Element) current.getParentNode();
     }
 }

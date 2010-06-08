@@ -1,4 +1,7 @@
-package org.jtheque.xml.utils;
+package org.jtheque.xml.utils.jdom;
+
+import org.jtheque.xml.utils.Node;
+import org.jtheque.xml.utils.NodeAttribute;
 
 /*
  * Copyright JTheque (Baptiste Wicht)

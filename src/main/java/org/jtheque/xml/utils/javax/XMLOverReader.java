@@ -16,11 +16,22 @@ package org.jtheque.xml.utils.javax;
  * limitations under the License.
  */
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
-import org.jdom.xpath.XPath;
+import org.jtheque.xml.utils.XMLException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import java.io.Closeable;
 import java.io.File;
@@ -31,6 +42,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
@@ -40,15 +52,15 @@ import java.util.Iterator;
  * @author Baptiste Wicht
  */
 public final class XMLOverReader implements Closeable {
-    private InputStream stream;
-    private Document document;
-
     private static final String OPEN_ERROR = "Error opening the file";
     private static final String READING_ERROR = "Error reading the file";
 
-    private Element current;
-
     private final Deque<Entry> elements = new ArrayDeque<Entry>();
+
+    private InputStream stream;
+    private Document document;
+    private Element current;
+    private XPathFactory xPathFactory;
 
     /**
      * Open the file a the URL.
@@ -82,13 +94,19 @@ public final class XMLOverReader implements Closeable {
 
             stream = urlConnection.getInputStream();
 
-            SAXBuilder sxb = new SAXBuilder("org.apache.xerces.parsers.SAXParser");
-
             try {
-                document = sxb.build(stream);
+                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 
-                current = document.getRootElement();
-            } catch (JDOMException e) {
+                document = docBuilder.parse(stream);
+                document.getDocumentElement().normalize();
+
+                xPathFactory = XPathFactory.newInstance();
+
+                current = document.getDocumentElement();
+            } catch (ParserConfigurationException e) {
+                throw new XMLException(OPEN_ERROR, e);
+            } catch (SAXException e) {
                 throw new XMLException(OPEN_ERROR, e);
             }
         } catch (IOException e) {
@@ -116,14 +134,20 @@ public final class XMLOverReader implements Closeable {
         try {
             stream = new FileInputStream(file);
 
-            SAXBuilder sxb = new SAXBuilder();
+            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 
-            document = sxb.build(stream);
+            document = docBuilder.parse(stream);
+            document.getDocumentElement().normalize();
 
-            current = document.getRootElement();
-        } catch (JDOMException e) {
-            throw new XMLException(OPEN_ERROR, e);
+            xPathFactory = XPathFactory.newInstance();
+
+            current = document.getDocumentElement();
         } catch (IOException e) {
+            throw new XMLException(OPEN_ERROR, e);
+        } catch (ParserConfigurationException e) {
+            throw new XMLException(OPEN_ERROR, e);
+        } catch (SAXException e) {
             throw new XMLException(OPEN_ERROR, e);
         }
     }
@@ -144,15 +168,17 @@ public final class XMLOverReader implements Closeable {
      */
     public boolean readNode(String path) throws XMLException {
         try {
-            Element n = (Element) XPath.newInstance(path).selectSingleNode(current);
+            XPathExpression expression = xPathFactory.newXPath().compile(path);
+
+            Element n = (Element) expression.evaluate(current, XPathConstants.NODE);
 
             if (n != null) {
                 current = n;
 
                 return true;
             }
-        } catch (JDOMException e) {
-            throw new XMLException("Error selecting nodes", e);
+        } catch (XPathExpressionException e) {
+            throw new XMLException("Error selecting node", e);
         }
 
         return false;
@@ -166,7 +192,7 @@ public final class XMLOverReader implements Closeable {
             throw new IllegalArgumentException("No current element");
         }
 
-        current = current.getParentElement();
+        current = (Element) current.getParentNode();
     }
 
     /**
@@ -180,14 +206,19 @@ public final class XMLOverReader implements Closeable {
     public boolean next(String path) throws XMLException {
         if (elements.isEmpty() || !elements.peek().getPath().equals(path)) {
             try {
-                elements.addFirst(new Entry(path, XPath.newInstance(path).selectNodes(current).iterator()));
-            } catch (JDOMException e) {
+                XPathExpression expression = xPathFactory.newXPath().compile(path);
+
+                Collection<Node> nodes = new NodeListCollection((NodeList) expression.evaluate(current,
+                        XPathConstants.NODESET));
+
+                elements.addFirst(new Entry(path, nodes.iterator()));
+            } catch (XPathExpressionException e) {
                 throw new XMLException("Error selecting nodes", e);
             }
         }
 
         if (elements.peek().getElements().hasNext()) {
-            current = elements.peek().getElements().next();
+            current = (Element) elements.peek().getElements().next();
 
             return true;
         } else {
@@ -207,9 +238,13 @@ public final class XMLOverReader implements Closeable {
     public String readString(String path) throws XMLException {
         String value;
 
+        XPath xPath = xPathFactory.newXPath();
+
         try {
-            value = XPath.newInstance(path).valueOf(current);
-        } catch (JDOMException e) {
+            XPathExpression expression = xPath.compile(path);
+
+            value = (String) expression.evaluate(current, XPathConstants.STRING);
+        } catch (XPathExpressionException e) {
             throw new XMLException(READING_ERROR, e);
         }
 
@@ -224,15 +259,7 @@ public final class XMLOverReader implements Closeable {
      * @throws XMLException If an errors occurs during the reading process.
      */
     public int readInt(String path) throws XMLException {
-        String value;
-
-        try {
-            value = XPath.newInstance(path).valueOf(current);
-        } catch (JDOMException e) {
-            throw new XMLException(READING_ERROR, e);
-        }
-
-        return Integer.parseInt(value);
+        return Integer.parseInt(readString(path));
     }
 
     /**
@@ -243,15 +270,7 @@ public final class XMLOverReader implements Closeable {
      * @throws XMLException If an errors occurs during the reading process.
      */
     public double readDouble(String path) throws XMLException {
-        String value;
-
-        try {
-            value = XPath.newInstance(path).valueOf(current);
-        } catch (JDOMException e) {
-            throw new XMLException(READING_ERROR, e);
-        }
-
-        return Double.parseDouble(value);
+        return Double.parseDouble(readString(path));
     }
 
     /**
@@ -262,15 +281,7 @@ public final class XMLOverReader implements Closeable {
      * @throws XMLException If an errors occurs during the reading process.
      */
     public boolean readBoolean(String path) throws XMLException {
-        String value;
-
-        try {
-            value = XPath.newInstance(path).valueOf(current);
-        } catch (JDOMException e) {
-            throw new XMLException(READING_ERROR, e);
-        }
-
-        return Boolean.parseBoolean(value);
+        return Boolean.parseBoolean(readString(path));
     }
 
     /**
@@ -281,15 +292,7 @@ public final class XMLOverReader implements Closeable {
      * @throws XMLException If an errors occurs during the reading process.
      */
     public long readLong(String path) throws XMLException {
-        String value;
-
-        try {
-            value = XPath.newInstance(path).valueOf(current);
-        } catch (JDOMException e) {
-            throw new XMLException(READING_ERROR, e);
-        }
-
-        return Long.parseLong(value);
+        return Long.parseLong(readString(path));
     }
 
     /**
@@ -299,7 +302,7 @@ public final class XMLOverReader implements Closeable {
      */
     private static final class Entry {
         private final String path;
-        private final Iterator<Element> elements;
+        private final Iterator<Node> elements;
 
         /**
          * Construct a new Entry.
@@ -307,7 +310,7 @@ public final class XMLOverReader implements Closeable {
          * @param path     The XPath request.
          * @param elements The iterator on the found elements.
          */
-        private Entry(String path, Iterator<Element> elements) {
+        private Entry(String path, Iterator<Node> elements) {
             super();
 
             this.path = path;
@@ -328,7 +331,7 @@ public final class XMLOverReader implements Closeable {
          *
          * @return The iterator on the results of the request.
          */
-        public Iterator<Element> getElements() {
+        public Iterator<Node> getElements() {
             return elements;
         }
     }
