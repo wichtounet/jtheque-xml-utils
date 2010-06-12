@@ -36,6 +36,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -58,7 +59,6 @@ public final class XMLOverReader implements Closeable {
     private final Deque<Entry> elements = new ArrayDeque<Entry>();
 
     private InputStream stream;
-    private Document document;
     private Element current;
     private XPathFactory xPathFactory;
 
@@ -92,23 +92,7 @@ public final class XMLOverReader implements Closeable {
 
             urlConnection.connect();
 
-            stream = urlConnection.getInputStream();
-
-            try {
-                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-
-                document = docBuilder.parse(stream);
-                document.getDocumentElement().normalize();
-
-                xPathFactory = XPathFactory.newInstance();
-
-                current = document.getDocumentElement();
-            } catch (ParserConfigurationException e) {
-                throw new XMLException(OPEN_ERROR, e);
-            } catch (SAXException e) {
-                throw new XMLException(OPEN_ERROR, e);
-            }
+            openStream(urlConnection.getInputStream());
         } catch (IOException e) {
             throw new XMLException(OPEN_ERROR, e);
         }
@@ -132,12 +116,20 @@ public final class XMLOverReader implements Closeable {
      */
     public void openFile(File file) throws XMLException {
         try {
-            stream = new FileInputStream(file);
+            openStream(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            throw new XMLException(OPEN_ERROR, e);
+        }
+    }
+
+    public void openStream(InputStream stream) throws XMLException {
+        try {
+            this.stream = stream;
 
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 
-            document = docBuilder.parse(stream);
+            Document document = docBuilder.parse(stream);
             document.getDocumentElement().normalize();
 
             xPathFactory = XPathFactory.newInstance();
