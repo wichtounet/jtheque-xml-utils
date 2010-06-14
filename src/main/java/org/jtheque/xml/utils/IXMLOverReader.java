@@ -16,6 +16,11 @@ package org.jtheque.xml.utils;
  * limitations under the License.
  */
 
+/**
+ * An XML Over reader. This kind of reader keep in memory a current element to make reading easier.
+ *
+ * @author Baptiste Wicht
+ */
 public interface IXMLOverReader extends Reader {
     /**
      * Read a node from the current element. The current element become the read node if there is one.

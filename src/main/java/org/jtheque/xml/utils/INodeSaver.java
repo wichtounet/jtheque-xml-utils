@@ -16,6 +16,20 @@ package org.jtheque.xml.utils;
  * limitations under the License.
  */
 
+/**
+ * A node saver. It takes a collection of generic Nodes and write them
+ * using the given writer.
+ *
+ * @param <T> The type of writer.
+ *
+ * @author Baptiste Wicht
+ */
 public interface INodeSaver<T> {
+    /**
+     * Write the given generic nodes into the given writer.
+     *
+     * @param writer The writer to use.
+     * @param nodes The nodes to write. 
+     */
     void writeNodes(T writer, Iterable<Node> nodes);
 }

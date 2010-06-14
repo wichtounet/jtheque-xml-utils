@@ -20,6 +20,11 @@ import org.jtheque.xml.utils.NodeAttribute;
  * limitations under the License.
  */
 
+/**
+ * A Node saver implementation with JDOM.
+ *
+ * @author Baptiste Wicht
+ */
 public final class JDOMNodeSaver implements INodeSaver<JDOMXMLWriter> {
     @Override
     public void writeNodes(JDOMXMLWriter writer, Iterable<Node> nodes) {

@@ -81,6 +81,11 @@ public final class Node {
         return childrens;
     }
 
+    /**
+     * Add a child to the node.
+     *
+     * @param child The child to add.
+     */
     public void addChild(Node child){
         childrens.add(child);
     }
@@ -95,7 +100,7 @@ public final class Node {
     }
 
     /**
-     * Add a simple child value.
+     * Add a simple child with a string value.
      *
      * @param name  The name of the node.
      * @param value The value of the node.
@@ -104,10 +109,22 @@ public final class Node {
         childrens.add(new Node(name, value));
     }
 
+    /**
+     * Add a simple child with a int value.
+     *
+     * @param name The name of child
+     * @param value The value of the node.
+     */
     public void addSimpleChildValue(String name, int value) {
         childrens.add(new Node(name, Integer.toString(value)));
     }
 
+    /**
+     * Add a simple child with a long value.
+     *
+     * @param name The name of child
+     * @param value The value of the node.
+     */
     public void addSimpleChildValue(String name, long value) {
         childrens.add(new Node(name, Long.toString(value)));
     }
@@ -121,6 +138,13 @@ public final class Node {
         return text;
     }
 
+    /**
+     * Return the int value of the text of the node.
+     *
+     * @return The int value of the text of the node.
+     *
+     * @throws NumberFormatException If the text of the child cannot be parsed to int. 
+     */
     public int getInt() {
         return Integer.parseInt(text);
     }
@@ -143,6 +167,11 @@ public final class Node {
         return attributes;
     }
 
+    /**
+     * Add an attribute to the node. 
+     *
+     * @param attribute The attribute to add.
+     */
     public void addAttribute(NodeAttribute attribute){
         attributes.add(attribute);
     }
@@ -223,6 +252,13 @@ public final class Node {
         return 0;
     }
 
+    /**
+     * Return the String value of the child text.
+     *
+     * @param name The name of the child.
+     *
+     * @return The String value of the child text.
+     */
     public String getChildValue(String name) {
         for(Node child : childrens){
             if(name.equals(child.name)){
@@ -233,15 +269,39 @@ public final class Node {
         return null;
     }
 
+    /**
+     * Return the int value of the child text.
+     *
+     * @param name The name of the child.
+     *
+     * @return The int value of the child text.
+     *
+     * @throws IllegalStateException If there is no child of this name
+     * @throws NumberFormatException If the child value is not a int
+     */
     public int getChildIntValue(String name) {
         String value = getChildValue(name);
 
         return value == null ? 0 : Integer.parseInt(value);
     }
 
+    /**
+     * Return the Long value of the child text.
+     *
+     * @param name The name of the child.
+     *
+     * @return The Long value of the child text.
+     *
+     * @throws IllegalStateException If there is no child of this name
+     * @throws NumberFormatException If the child value is not a long
+     */
     public long getChildLongValue(String name) {
         String value = getChildValue(name);
 
-        return value == null ? 0 : Long.parseLong(value);
+        if(value == null){
+            throw new IllegalStateException("There is no child of this name");
+        }
+
+        return Long.parseLong(value);
     }
 }

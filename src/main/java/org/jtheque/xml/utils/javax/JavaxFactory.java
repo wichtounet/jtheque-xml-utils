@@ -25,6 +25,11 @@ import org.jtheque.xml.utils.XMLFactory;
 
 import org.w3c.dom.Node;
 
+/**
+ * A factory to create XML instances using Java.
+ *
+ * @author Baptiste Wicht
+ */
 public final class JavaxFactory implements XMLFactory<Node, IXMLWriter<Node>> {
     @Override
     public INodeLoader<Node> newNodeLoader() {
@@ -47,7 +52,7 @@ public final class JavaxFactory implements XMLFactory<Node, IXMLWriter<Node>> {
     }
 
     @Override
-    public IXMLOverReader newXMlReader() {
+    public IXMLOverReader newOverReader() {
         return new JavaxXMLOverReader();
     }
 }

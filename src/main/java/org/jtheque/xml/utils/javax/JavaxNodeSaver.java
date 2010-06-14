@@ -21,6 +21,11 @@ import org.jtheque.xml.utils.NodeAttribute;
  * limitations under the License.
  */
 
+/**
+ * A Node Saver implementation with Java.
+ *
+ * @author Baptiste Wicht
+ */
 public final class JavaxNodeSaver implements INodeSaver<IXMLWriter<org.w3c.dom.Node>> {
     @Override
     public void writeNodes(IXMLWriter<org.w3c.dom.Node> writer, Iterable<Node> nodes) {

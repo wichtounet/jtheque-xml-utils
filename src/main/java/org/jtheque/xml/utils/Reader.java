@@ -21,6 +21,11 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 
+/**
+ * A basic XML Reader. Provide only ways to open XML documents. 
+ *
+ * @author Baptiste Wicht
+ */
 public interface Reader extends Closeable {
     /**
      * Open the file a the URL.
@@ -58,5 +63,12 @@ public interface Reader extends Closeable {
      */
     void openFile(File file) throws XMLException;
 
+    /**
+     * Open the given stream.
+     *
+     * @param stream The stream to open.
+     *
+     * @throws XMLException If an error occurs during the open process.
+     */
     void openStream(InputStream stream) throws XMLException;
 }

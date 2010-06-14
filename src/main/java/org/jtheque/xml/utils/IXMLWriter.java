@@ -16,6 +16,13 @@ package org.jtheque.xml.utils;
  * limitations under the License.
  */
 
+/**
+ * An XML writer.
+ *
+ * @param <T> The type of element.
+ *
+ * @author Baptiste Wicht
+ */
 public interface IXMLWriter<T> {
     /**
      * Add the element to the document and set the new element as the current element.

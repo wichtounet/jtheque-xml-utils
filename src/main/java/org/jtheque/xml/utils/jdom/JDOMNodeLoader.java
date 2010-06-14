@@ -26,6 +26,11 @@ import java.util.Collection;
  * limitations under the License.
  */
 
+/**
+ * A Node Loader implementation with JDOM.
+ *
+ * @author Baptiste Wicht
+ */
 public final class JDOMNodeLoader implements INodeLoader<Element> {
     @Override
     public Collection<Node> resolveNodeStates(Collection<Element> nodes) {

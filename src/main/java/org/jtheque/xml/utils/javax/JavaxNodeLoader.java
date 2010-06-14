@@ -26,6 +26,11 @@ import java.util.Collection;
  * limitations under the License.
  */
 
+/**
+ * A Node Loader implementation with Java.
+ *
+ * @author Baptiste Wicht
+ */
 final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
     @Override
     public Collection<Node> resolveNodeStates(Collection<org.w3c.dom.Node> nodes) {

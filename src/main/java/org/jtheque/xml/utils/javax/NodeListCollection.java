@@ -24,9 +24,19 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A collection wrapper for NodeList.
+ *
+ * @author Baptiste Wicht
+ */
 final class NodeListCollection implements Collection<Node> {
     private final NodeList nodeList;
 
+    /**
+     * Construct a new collection wrapper for the given list.
+     *
+     * @param nodeList The node list. 
+     */
     NodeListCollection(NodeList nodeList) {
         super();
 
@@ -110,6 +120,11 @@ final class NodeListCollection implements Collection<Node> {
         throw new UnsupportedOperationException("Modification is not supported");
     }
 
+    /**
+     * An iterator for the list.
+     *
+     * @author Baptiste Wicht
+     */
     private final class NodeListCollectionIterator implements Iterator<Node> {
         private int cursor;
 

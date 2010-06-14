@@ -25,6 +25,11 @@ import org.jtheque.xml.utils.XMLFactory;
 
 import org.jdom.Element;
 
+/**
+ * A XML Factory implementation for JDOM.
+ *
+ * @author Baptiste Wicht
+ */
 public final class JDOMFactory implements XMLFactory<Element, JDOMXMLWriter> {
     @Override
     public INodeLoader<Element> newNodeLoader() {
@@ -47,7 +52,7 @@ public final class JDOMFactory implements XMLFactory<Element, JDOMXMLWriter> {
     }
 
     @Override
-    public IXMLOverReader newXMlReader() {
+    public IXMLOverReader newOverReader() {
         return new JDOMXMLOverReader();
     }
 }

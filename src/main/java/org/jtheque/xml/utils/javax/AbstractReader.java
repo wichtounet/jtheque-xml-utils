@@ -39,6 +39,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * An abstract reader for Java.
+ *
+ * @author Baptiste Wicht
+ */
 public abstract class AbstractReader implements Reader {
     private static final String OPEN_ERROR = "Error opening the file";
     static final String READING_ERROR = "Error reading the file";
@@ -118,18 +123,38 @@ public abstract class AbstractReader implements Reader {
         }
     }
 
+    /**
+     * Return the current element.
+     *
+     * @return The current element.
+     */
     final Node getCurrent() {
         return current;
     }
 
+    /**
+     * Return the XPath instance.
+     *
+     * @return The XPath instance.
+     */
     final XPath getXPath() {
         return xPath;
     }
 
+    /**
+     * Return the document currently read by the reader.
+     *
+     * @return The document.
+     */
     final Document getDocument() {
         return document;
     }
 
+    /**
+     * Set the current element.
+     *
+     * @param current The current element.
+     */
     final void setCurrent(Element current) {
         this.current = current;
     }

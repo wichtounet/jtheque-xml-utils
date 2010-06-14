@@ -18,6 +18,13 @@ package org.jtheque.xml.utils;
 
 import java.util.Collection;
 
+/**
+ * A simple XML Reader specification.
+ *
+ * @param <T> The type of element.
+ *
+ * @author Baptiste Wicht
+ */
 public interface IXMLReader<T> extends Reader {
     /**
      * Return the root element of the reader.

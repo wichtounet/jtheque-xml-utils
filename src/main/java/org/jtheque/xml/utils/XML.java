@@ -23,18 +23,36 @@ import org.w3c.dom.Node;
  * limitations under the License.
  */
 
+/**
+ * XML Utils base class. This class provide methods to access factories.
+ *
+ * @author Baptiste Wicht
+ */
 public class XML {
     private static final XMLFactory<Element, JDOMXMLWriter> JDOM_FACTORY = new JDOMFactory();
     private static final XMLFactory<Node, IXMLWriter<Node>> JAVA_FACTORY = new JavaxFactory();
 
+    /**
+     * Utility class, not instantiable.
+     */
     private XML() {
         super();
     }
 
+    /**
+     * Return a JDOM Factory.
+     *
+     * @return A JDOM Factory.
+     */
     public static XMLFactory<Element, JDOMXMLWriter> newJDOmFactory(){
         return JDOM_FACTORY;
     }
 
+    /**
+     * Return a Java Factory.
+     *
+     * @return A Java Factory. 
+     */
     public static XMLFactory<Node, IXMLWriter<Node>> newJavaFactory() {
         return JAVA_FACTORY;
     }

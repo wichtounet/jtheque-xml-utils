@@ -16,14 +16,48 @@ package org.jtheque.xml.utils;
  * limitations under the License.
  */
 
+/**
+ * A XML Factory. It's a factory who can creates XML object instances to read and write XML files.
+ *
+ * @author Baptiste Wicht
+ * @param <T> The type of elements.
+ * @param <K> The type of writer.
+ */
 public interface XMLFactory<T, K> {
+    /**
+     * Create a new NodeLoader.
+     *
+     * @return A new node loader. 
+     */
     INodeLoader<T> newNodeLoader();
 
+    /**
+     * Create a new NodeSaver.
+     *
+     * @return A new node saver.
+     */
     INodeSaver<K> newNodeSaver();
 
+    /**
+     * Create a new Writer.
+     *
+     * @param root The root of the file.
+     *
+     * @return A New XML Writer using the given root name as root element.
+     */
     IXMLWriter<T> newWriter(String root);
 
+    /**
+     * Create a new XML reader.
+     *
+     * @return A new XML reader.
+     */
     IXMLReader<T> newReader();
 
-    IXMLOverReader newXMlReader();
+    /**
+     * Create a new XML Over Reader.
+     *
+     * @return A new XML Over reader.
+     */
+    IXMLOverReader newOverReader();
 }
