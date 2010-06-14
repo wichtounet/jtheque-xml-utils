@@ -21,9 +21,8 @@ import java.util.Collection;
 /**
  * A simple XML Reader specification.
  *
- * @param <T> The type of element.
- *
  * @author Baptiste Wicht
+ * @param <T> The type of element.
  */
 public interface IXMLReader<T> extends Reader {
     /**

@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * A basic XML Reader. Provide only ways to open XML documents. 
+ * A basic XML Reader. Provide only ways to open XML documents.
  *
  * @author Baptiste Wicht
  */

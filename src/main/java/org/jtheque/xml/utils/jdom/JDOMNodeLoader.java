@@ -49,6 +49,7 @@ public final class JDOMNodeLoader implements INodeLoader<Element> {
      * Resolve a Node apart from an Element.
      *
      * @param element The Element representing the Node
+     *
      * @return The resolved Node.
      */
     private Node resolve(Element element) {
@@ -63,8 +64,8 @@ public final class JDOMNodeLoader implements INodeLoader<Element> {
     /**
      * Read and fill the Node from the element.
      *
-     * @param element   The element to read.
-     * @param node The node state to fill.
+     * @param element The element to read.
+     * @param node    The node state to fill.
      */
     private void readNode(Element element, Node node) {
         if (element.getChildren().isEmpty()) {
@@ -89,8 +90,8 @@ public final class JDOMNodeLoader implements INodeLoader<Element> {
     /**
      * Read the attributes of the node state.
      *
-     * @param element   The element to get the attributes from.
-     * @param node The node state to fill.
+     * @param element The element to get the attributes from.
+     * @param node    The node state to fill.
      */
     private static void readAttributes(Element element, Node node) {
         if (!element.getAttributes().isEmpty()) {

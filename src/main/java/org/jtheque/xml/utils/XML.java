@@ -44,14 +44,14 @@ public class XML {
      *
      * @return A JDOM Factory.
      */
-    public static XMLFactory<Element, JDOMXMLWriter> newJDOmFactory(){
+    public static XMLFactory<Element, JDOMXMLWriter> newJDOmFactory() {
         return JDOM_FACTORY;
     }
 
     /**
      * Return a Java Factory.
      *
-     * @return A Java Factory. 
+     * @return A Java Factory.
      */
     public static XMLFactory<Node, IXMLWriter<Node>> newJavaFactory() {
         return JAVA_FACTORY;

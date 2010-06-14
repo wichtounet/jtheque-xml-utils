@@ -49,6 +49,7 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
      * Resolve a Node apart from an Element.
      *
      * @param element The Element representing the Node
+     *
      * @return The resolved Node.
      */
     private static Node resolve(org.w3c.dom.Node element) {
@@ -63,8 +64,8 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
     /**
      * Read and fill the Node from the element.
      *
-     * @param element   The element to read.
-     * @param node The node state to fill.
+     * @param element The element to read.
+     * @param node    The node state to fill.
      */
     private static void readNode(org.w3c.dom.Node element, Node node) {
         if (element.getChildNodes().getLength() == 0) {
@@ -78,7 +79,7 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
 
             Collection<Node> childrens = new ArrayList<Node>(childrenElements.getLength());
 
-            for(int i = 0; i < childrenElements.getLength(); i++){
+            for (int i = 0; i < childrenElements.getLength(); i++) {
                 childrens.add(resolve(childrenElements.item(i)));
             }
 
@@ -89,8 +90,8 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
     /**
      * Read the attributes of the node state.
      *
-     * @param element   The element to get the attributes from.
-     * @param node The node state to fill.
+     * @param element The element to get the attributes from.
+     * @param node    The node state to fill.
      */
     private static void readAttributes(org.w3c.dom.Node element, Node node) {
         if (element.getAttributes() != null && element.getAttributes().getLength() != 0) {

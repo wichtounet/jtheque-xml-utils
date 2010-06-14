@@ -27,7 +27,7 @@ public interface XMLFactory<T, K> {
     /**
      * Create a new NodeLoader.
      *
-     * @return A new node loader. 
+     * @return A new node loader.
      */
     INodeLoader<T> newNodeLoader();
 

@@ -19,18 +19,17 @@ package org.jtheque.xml.utils;
 import java.util.Collection;
 
 /**
- * A Node Loader. It takes a collection of node from a XML file and resolve it
- * into generic Node.
+ * A Node Loader. It takes a collection of node from a XML file and resolve it into generic Node.
  *
+ * @author Baptiste Wicht
  * @param <T> The type of node to resolve.
- *
- * @author Baptiste Wicht 
  */
 public interface INodeLoader<T> {
     /**
      * Resolve the node states from the XML elements.
      *
      * @param nodes The nodes to transform to Node.
+     *
      * @return A List containing all the resolved Node.
      */
     Collection<Node> resolveNodeStates(Collection<T> nodes);

@@ -35,7 +35,7 @@ final class NodeListCollection implements Collection<Node> {
     /**
      * Construct a new collection wrapper for the given list.
      *
-     * @param nodeList The node list. 
+     * @param nodeList The node list.
      */
     NodeListCollection(NodeList nodeList) {
         super();

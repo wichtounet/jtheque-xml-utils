@@ -16,8 +16,8 @@ package org.jtheque.xml.utils.jdom;
  * limitations under the License.
  */
 
-import org.jtheque.xml.utils.XMLException;
 import org.jtheque.xml.utils.Reader;
+import org.jtheque.xml.utils.XMLException;
 
 import org.jdom.Content;
 import org.jdom.Document;

@@ -86,7 +86,7 @@ public final class Node {
      *
      * @param child The child to add.
      */
-    public void addChild(Node child){
+    public void addChild(Node child) {
         childrens.add(child);
     }
 
@@ -112,7 +112,7 @@ public final class Node {
     /**
      * Add a simple child with a int value.
      *
-     * @param name The name of child
+     * @param name  The name of child
      * @param value The value of the node.
      */
     public void addSimpleChildValue(String name, int value) {
@@ -122,7 +122,7 @@ public final class Node {
     /**
      * Add a simple child with a long value.
      *
-     * @param name The name of child
+     * @param name  The name of child
      * @param value The value of the node.
      */
     public void addSimpleChildValue(String name, long value) {
@@ -143,7 +143,7 @@ public final class Node {
      *
      * @return The int value of the text of the node.
      *
-     * @throws NumberFormatException If the text of the child cannot be parsed to int. 
+     * @throws NumberFormatException If the text of the child cannot be parsed to int.
      */
     public int getInt() {
         return Integer.parseInt(text);
@@ -168,11 +168,11 @@ public final class Node {
     }
 
     /**
-     * Add an attribute to the node. 
+     * Add an attribute to the node.
      *
      * @param attribute The attribute to add.
      */
-    public void addAttribute(NodeAttribute attribute){
+    public void addAttribute(NodeAttribute attribute) {
         attributes.add(attribute);
     }
 
@@ -242,10 +242,10 @@ public final class Node {
      *
      * @return The int value of the attribute or 0 if the attribute doesn't exist.
      */
-    public int getIntAttributeValue(String key){
+    public int getIntAttributeValue(String key) {
         String value = getAttributeValue(key);
 
-        if(StringUtils.isNotEmpty(value)){
+        if (StringUtils.isNotEmpty(value)) {
             return Integer.parseInt(value);
         }
 
@@ -260,8 +260,8 @@ public final class Node {
      * @return The String value of the child text.
      */
     public String getChildValue(String name) {
-        for(Node child : childrens){
-            if(name.equals(child.name)){
+        for (Node child : childrens) {
+            if (name.equals(child.name)) {
                 return child.text;
             }
         }
@@ -298,7 +298,7 @@ public final class Node {
     public long getChildLongValue(String name) {
         String value = getChildValue(name);
 
-        if(value == null){
+        if (value == null) {
             throw new IllegalStateException("There is no child of this name");
         }
 
