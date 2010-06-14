@@ -1,5 +1,7 @@
 package org.jtheque.xml.utils.javax;
 
+import org.jtheque.xml.utils.INodeSaver;
+import org.jtheque.xml.utils.IXMLWriter;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
 
@@ -19,12 +21,9 @@ import org.jtheque.xml.utils.NodeAttribute;
  * limitations under the License.
  */
 
-public final class NodeSaver {
-    private NodeSaver() {
-	    super();
-    }
-
-    public static void writeNodes(XMLWriter writer, Iterable<Node> nodes) {
+public final class JavaxNodeSaver implements INodeSaver<IXMLWriter<org.w3c.dom.Node>> {
+    @Override
+    public void writeNodes(IXMLWriter<org.w3c.dom.Node> writer, Iterable<Node> nodes) {
         for (Node node : nodes) {
             add(node, writer);
         }
@@ -36,7 +35,7 @@ public final class NodeSaver {
      * @param node   The node state to add to the writer.
      * @param writer The XML writer.
      */
-    private static void add(Node node, XMLWriter writer) {
+    private void add(Node node, IXMLWriter<org.w3c.dom.Node> writer) {
         if (node.hasChildren()) {
             writer.add(node.getName());
 

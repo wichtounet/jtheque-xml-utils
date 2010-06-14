@@ -1,10 +1,11 @@
 package org.jtheque.xml.utils.javax;
 
-import org.jtheque.xml.utils.XMLException;
+import org.jtheque.xml.utils.IXMLWriter;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
  *
  * @author Baptiste Wicht
  */
-public final class XMLWriter {
+public final class JavaxXMLWriter implements IXMLWriter<Node> {
     private final Document document;
 
     private Element current;
@@ -41,7 +42,7 @@ public final class XMLWriter {
      *
      * @param root The name of the root element.
      */
-    public XMLWriter(String root){
+    public JavaxXMLWriter(String root) {
         super();
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -59,11 +60,7 @@ public final class XMLWriter {
         }
     }
 
-    /**
-     * Add the element to the document and set the new element as the current element.
-     *
-     * @param element The element to add.
-     */
+    @Override
     public void add(String element) {
         Element newElement = document.createElement(element);
 
@@ -72,24 +69,14 @@ public final class XMLWriter {
         current = newElement;
     }
 
-    /**
-     * Add an element to the document and set the new element as the current element.
-     *
-     * @param element The name of the element to add.
-     * @param text    The text of the element.
-     */
+    @Override
     public void add(String element, String text) {
         add(element);
 
         current.setTextContent(text);
     }
 
-    /**
-     * Add the element.
-     *
-     * @param element The name of the element.
-     * @param text    The text of the element.
-     */
+    @Override
     public void addOnly(String element, String text) {
         Element newElement = document.createElement(element);
 
@@ -98,56 +85,27 @@ public final class XMLWriter {
         current.appendChild(newElement);
     }
 
-    /**
-     * Add only the element with the specified value.
-     *
-     * @param element The element.
-     * @param value   The value of the element.
-     */
+    @Override
     public void addOnly(String element, int value) {
         addOnly(element, Integer.toString(value));
     }
 
-    /**
-     * Add an attribute to the current element.
-     *
-     * @param key   The key of the attribute.
-     * @param value The value of the attribute.
-     */
+    @Override
     public void addAttribute(String key, String value) {
         current.setAttribute(key, value);
     }
 
-    /**
-     * Return the root element of the document.
-     *
-     * @return The root element of the document.
-     */
+    @Override
     public Element getRoot() {
         return document.getDocumentElement();
     }
 
-    /**
-     * Set the current element.
-     *
-     * @param element The current element.
-     */
-    public void setCurrent(Element element) {
-        current = element;
-    }
-
-    /**
-     * Write the XML document to the file path.
-     *
-     * @param filePath The file path.
-     */
+    @Override
     public void write(String filePath) {
         XMLUtils.writeXml(document, filePath);
     }
 
-    /**
-     * Switch to parent.
-     */
+    @Override
     public void switchToParent() {
         current = (Element) current.getParentNode();
     }

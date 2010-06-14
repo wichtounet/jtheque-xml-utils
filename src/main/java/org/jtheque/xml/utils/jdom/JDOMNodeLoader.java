@@ -1,10 +1,11 @@
-package org.jtheque.xml.utils.javax;
+package org.jtheque.xml.utils.jdom;
 
+import org.jtheque.xml.utils.INodeLoader;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
 
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.NodeList;
+import org.jdom.Attribute;
+import org.jdom.Element;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,21 +26,12 @@ import java.util.Collection;
  * limitations under the License.
  */
 
-public final class NodeLoader {
-    private NodeLoader() {
-        super();
-    }
-
-    /**
-     * Resolve the node states from the XML elements.
-     *
-     * @param nodes The nodes to transform to Node.
-     * @return A List containing all the resolved Node.
-     */
-    public static Collection<Node> resolveNodeStates(Collection<org.w3c.dom.Node> nodes) {
+public final class JDOMNodeLoader implements INodeLoader<Element> {
+    @Override
+    public Collection<Node> resolveNodeStates(Collection<Element> nodes) {
         Collection<Node> nodeStates = new ArrayList<Node>(nodes.size());
 
-        for (org.w3c.dom.Node element : nodes) {
+        for (Element element : nodes) {
             Node node = resolve(element);
 
             nodeStates.add(node);
@@ -54,8 +46,8 @@ public final class NodeLoader {
      * @param element The Element representing the Node
      * @return The resolved Node.
      */
-    private static Node resolve(org.w3c.dom.Node element) {
-        Node node = new Node(element.getNodeName());
+    private Node resolve(Element element) {
+        Node node = new Node(element.getName());
 
         readNode(element, node);
         readAttributes(element, node);
@@ -69,20 +61,20 @@ public final class NodeLoader {
      * @param element   The element to read.
      * @param node The node state to fill.
      */
-    private static void readNode(org.w3c.dom.Node element, Node node) {
-        if (element.getChildNodes().getLength() == 0) {
-            String text = element.getTextContent();
+    private void readNode(Element element, Node node) {
+        if (element.getChildren().isEmpty()) {
+            String text = element.getText();
 
             if (text != null && !text.isEmpty()) {
                 node.setText(text);
             }
         } else {
-            NodeList childrenElements = element.getChildNodes();
+            Collection<Element> childrenElements = element.getChildren();
 
-            Collection<Node> childrens = new ArrayList<Node>(childrenElements.getLength());
+            Collection<Node> childrens = new ArrayList<Node>(childrenElements.size());
 
-            for(int i = 0; i < childrenElements.getLength(); i++){
-                childrens.add(resolve(childrenElements.item(i)));
+            for (Element childrenElement : childrenElements) {
+                childrens.add(resolve(childrenElement));
             }
 
             node.setChildrens(childrens);
@@ -95,16 +87,14 @@ public final class NodeLoader {
      * @param element   The element to get the attributes from.
      * @param node The node state to fill.
      */
-    private static void readAttributes(org.w3c.dom.Node element, Node node) {
-        if (element.getAttributes().getLength() != 0) {
-            NamedNodeMap attributes = element.getAttributes();
+    private static void readAttributes(Element element, Node node) {
+        if (!element.getAttributes().isEmpty()) {
+            Collection<Attribute> attributes = element.getAttributes();
 
-            Collection<NodeAttribute> nodeAttributes = new ArrayList<NodeAttribute>(attributes.getLength());
+            Collection<NodeAttribute> nodeAttributes = new ArrayList<NodeAttribute>(attributes.size());
 
-            for (int i = 0; i < attributes.getLength(); i++) {
-                nodeAttributes.add(new NodeAttribute(
-                        attributes.item(i).getNodeName(),
-                        attributes.item(i).getTextContent()));
+            for (Attribute attribute : attributes) {
+                nodeAttributes.add(new NodeAttribute(attribute.getName(), attribute.getValue()));
             }
 
             node.setAttributes(nodeAttributes);

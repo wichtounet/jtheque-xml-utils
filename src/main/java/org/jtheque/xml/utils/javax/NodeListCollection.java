@@ -22,9 +22,10 @@ import org.w3c.dom.NodeList;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-class NodeListCollection implements Collection<Node> {
-    private NodeList nodeList;
+final class NodeListCollection implements Collection<Node> {
+    private final NodeList nodeList;
 
     NodeListCollection(NodeList nodeList) {
         super();
@@ -109,19 +110,25 @@ class NodeListCollection implements Collection<Node> {
         throw new UnsupportedOperationException("Modification is not supported");
     }
 
-    private class NodeListCollectionIterator implements Iterator<Node> {
-        private int current;
+    private final class NodeListCollectionIterator implements Iterator<Node> {
+        private int cursor;
 
         @Override
         public boolean hasNext() {
-            return current + 1 < nodeList.getLength();
+            return cursor != size();
         }
 
         @Override
         public Node next() {
-            current++;
+            int i = cursor;
 
-            return nodeList.item(current);
+            if (i >= size()) {
+                throw new NoSuchElementException();
+            }
+
+            cursor = i + 1;
+
+            return nodeList.item(i);
         }
 
         @Override

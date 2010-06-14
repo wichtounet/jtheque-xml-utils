@@ -31,11 +31,6 @@
     </distributionManagement>
 
     <build>
-        <directory>${env.BUILD_HOME}/utils/jtheque-xml-utils</directory>
-
-        <outputDirectory>${env.BUILD_HOME}/utils/jtheque-xml-utils/classes/production</outputDirectory>
-        <testOutputDirectory>${env.BUILD_HOME}/utils/jtheque-xml-utils/classes/test</testOutputDirectory>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -53,7 +48,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>org.jtheque.xml.utils, org.jtheque.xml.utils.jdom, org.jtheque.xml.utils.javax</Export-Package>
+                        <Export-Package>org.jtheque.xml.utils</Export-Package>
                         <Bundle-Vendor>Baptiste Wicht</Bundle-Vendor>
                         <Import-Package>javax.xml.namespace,javax.xml.parsers,javax.xml.transform,
                             javax.xml.transform.dom,javax.xml.transform.stream,javax.xml.xpath,
@@ -130,17 +125,6 @@
                   <locales>fr,en</locales>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-plugin</artifactId>
-                <configuration>
-                    <tag>${BUILD_NUMBER}</tag>
-                    <tagBase>http://wichtounet.homedns.org/svn/jtheque-xml-utils/continuous/</tagBase>
-                    <username>wichtounet</username>
-                    <password>${svn.password}</password>
-                </configuration>
-            </plugin>
         </plugins>
 
         <extensions>
@@ -211,32 +195,26 @@
 
         <dependency>
             <groupId>org.jdom</groupId>
-            <artifactId>org.jtheque.jdom</artifactId>
-                <version>1.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>org.jtheque.xercesImpl</artifactId>
-                <version>2.9.1</version>
+            <artifactId>jdom</artifactId>
+                <version>1.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.jdom</groupId>
-            <artifactId>org.jtheque.saxpath</artifactId>
-            <version>1.0.0</version>
+            <artifactId>saxpath</artifactId>
+            <version>1.0-FCS</version>
         </dependency>
 
         <dependency>
             <groupId>org.jdom</groupId>
-            <artifactId>org.jtheque.jaxen-core</artifactId>
-                <version>1.0.0</version>
+            <artifactId>jaxen-core</artifactId>
+                <version>1.0-FCS</version>
         </dependency>
 
         <dependency>
             <groupId>org.jdom</groupId>
-            <artifactId>org.jtheque.jaxen-jdom</artifactId>
-            <version>1.0.0</version>
+            <artifactId>jaxen-jdom</artifactId>
+            <version>1.0-FCS</version>
         </dependency>
     </dependencies>
 

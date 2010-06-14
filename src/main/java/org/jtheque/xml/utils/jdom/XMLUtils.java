@@ -34,7 +34,7 @@ import java.io.OutputStream;
  *
  * @author Baptiste Wicht
  */
-public final class XMLUtils {
+final class XMLUtils {
     /**
      * This is an utility class, not instanciable.
      */
@@ -48,7 +48,7 @@ public final class XMLUtils {
      * @param doc  The XML document to save.
      * @param path The path to the file.
      */
-    public static void writeXml(Document doc, String path) {
+    static void writeXml(Document doc, String path) {
         XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 
         boolean fileOk = true;
