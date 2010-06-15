@@ -20,6 +20,11 @@
     </scm>
 
     <distributionManagement>
+        <site>
+            <id>bw-web-server</id>
+            <name>BW FTP Server</name>
+            <url>ftp://baptiste-wicht.com/jtheque/xml-utils</url>
+        </site>
         <repository>
             <id>Server-PC-releases</id>
             <name>Server-PC-releases</name>
@@ -141,7 +146,6 @@
 
     <reporting>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -263,5 +267,4 @@
         <sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
         <sonar.cpd.minimumTokens>50</sonar.cpd.minimumTokens>
     </properties>
-
 </project>
