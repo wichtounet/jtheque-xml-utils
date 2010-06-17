@@ -1,5 +1,6 @@
 package org.jtheque.xml.utils.jdom;
 
+import org.jtheque.utils.StringUtils;
 import org.jtheque.xml.utils.INodeLoader;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
@@ -37,9 +38,7 @@ public final class JDOMNodeLoader implements INodeLoader<Element> {
         Collection<Node> nodeStates = new ArrayList<Node>(nodes.size());
 
         for (Element element : nodes) {
-            Node node = resolve(element);
-
-            nodeStates.add(node);
+            nodeStates.add(resolve(element));
         }
 
         return nodeStates;
@@ -68,13 +67,13 @@ public final class JDOMNodeLoader implements INodeLoader<Element> {
      * @param node    The node state to fill.
      */
     private void readNode(Element element, Node node) {
-        if (element.getChildren().isEmpty()) {
-            String text = element.getText();
+        String text = element.getText();
 
-            if (text != null && !text.isEmpty()) {
-                node.setText(text);
-            }
-        } else {
+        if (StringUtils.isNotEmpty(text)) {
+            node.setText(text);
+        }
+
+        if (!element.getChildren().isEmpty()) {
             Collection<Element> childrenElements = element.getChildren();
 
             Collection<Node> childrens = new ArrayList<Node>(childrenElements.size());
