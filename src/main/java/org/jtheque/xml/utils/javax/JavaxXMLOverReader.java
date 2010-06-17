@@ -91,15 +91,11 @@ public final class JavaxXMLOverReader extends AbstractReader implements IXMLOver
 
     @Override
     public String readString(String path) throws XMLException {
-        String value;
-
         try {
-            value = (String) getXPath().compile(path).evaluate(getCurrent(), XPathConstants.STRING);
+            return (String) getXPath().compile(path).evaluate(getCurrent(), XPathConstants.STRING);
         } catch (XPathExpressionException e) {
             throw new XMLException(READING_ERROR, e);
         }
-
-        return value;
     }
 
     @Override

@@ -84,15 +84,11 @@ public final class JDOMXMLOverReader extends AbstractReader implements IXMLOverR
 
     @Override
     public String readString(String path) throws XMLException {
-        String value;
-
         try {
-            value = XPath.newInstance(path).valueOf(getCurrent());
+            return XPath.newInstance(path).valueOf(getCurrent());
         } catch (JDOMException e) {
             throw new XMLException(READING_ERROR, e);
         }
-
-        return value;
     }
 
     @Override

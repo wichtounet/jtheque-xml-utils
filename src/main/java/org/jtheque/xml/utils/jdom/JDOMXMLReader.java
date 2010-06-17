@@ -74,15 +74,11 @@ public final class JDOMXMLReader extends AbstractReader implements IXMLReader<El
 
     @Override
     public String readString(String path, Object node) throws XMLException {
-        String value;
-
         try {
-            value = XPath.newInstance(path).valueOf(node);
+            return XPath.newInstance(path).valueOf(node);
         } catch (JDOMException e) {
             throw new XMLException(READING_ERROR, e);
         }
-
-        return value;
     }
 
     @Override

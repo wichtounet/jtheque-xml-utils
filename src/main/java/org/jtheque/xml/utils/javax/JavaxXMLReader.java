@@ -77,15 +77,11 @@ public final class JavaxXMLReader extends AbstractReader implements IXMLReader<N
 
     @Override
     public String readString(String path, Object node) throws XMLException {
-        String value;
-
         try {
-            value = (String) getXPath().evaluate(path, node, XPathConstants.STRING);
+            return (String) getXPath().evaluate(path, node, XPathConstants.STRING);
         } catch (XPathExpressionException e) {
             throw new XMLException(READING_ERROR, e);
         }
-
-        return value;
     }
 
     @Override
