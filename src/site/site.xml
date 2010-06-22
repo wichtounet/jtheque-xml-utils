@@ -20,12 +20,7 @@
 
         <menu name="JTheque XML Utils">
             <item name="Overview" href="index.html"/>
-            <item name="News" href="news.html"/>
-        </menu>
-
-        <menu name="Get JTheque XML Utils">
             <item name="Download" href="download.html"/>
-            <item name="Release notes" href="versions.html"/>
         </menu>
 
         <menu ref="reports"/>
