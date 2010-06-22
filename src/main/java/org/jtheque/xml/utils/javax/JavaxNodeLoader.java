@@ -1,5 +1,6 @@
 package org.jtheque.xml.utils.javax;
 
+import org.jtheque.utils.StringUtils;
 import org.jtheque.xml.utils.INodeLoader;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
@@ -37,9 +38,7 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
         Collection<Node> nodeStates = new ArrayList<Node>(nodes.size());
 
         for (org.w3c.dom.Node element : nodes) {
-            Node node = resolve(element);
-
-            nodeStates.add(node);
+            nodeStates.add(resolve(element));
         }
 
         return nodeStates;
@@ -68,13 +67,13 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
      * @param node    The node state to fill.
      */
     private static void readNode(org.w3c.dom.Node element, Node node) {
-        if (element.getChildNodes().getLength() == 0) {
-            String text = element.getTextContent();
+        String text = element.getTextContent();
 
-            if (text != null && !text.isEmpty()) {
-                node.setText(text);
-            }
-        } else {
+        if (StringUtils.isNotEmpty(text)) {
+            node.setText(text);
+        }
+
+        if (element.getChildNodes().getLength() != 0){
             NodeList childrenElements = element.getChildNodes();
 
             Collection<Node> childrens = new ArrayList<Node>(childrenElements.getLength());

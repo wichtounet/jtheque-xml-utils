@@ -9,7 +9,7 @@
     <groupId>org.jtheque</groupId>
     <artifactId>org.jtheque.xml.utils</artifactId>
     <packaging>bundle</packaging>
-    <name>org.jtheque.xml.utils</name>
+    <name>JTheque XML Utils</name>
     <version>1.0-SNAPSHOT</version>
 
     <url>http://github.com/wichtounet/jtheque-xml-utils</url>
@@ -52,6 +52,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -61,6 +62,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.1.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -72,8 +74,7 @@
                             org.jdom;version="1.1";resolution:=optional,org.jdom.input;version="1.1";resolution:=optional,
                             org.jdom.output;version="1.1";resolution:=optional,org.jdom.xpath;version="1.1";resolution:=optional,
                             org.jtheque.utils,org.jtheque.utils.collections,org.jtheque.utils.io,org.jtheque.xml.utils,
-                            org.slf4j;version="1.5",org.jtheque.xml.utils.javax,
-                            org.jtheque.xml.utils.jdom,org.w3c.dom,org.xml.sax
+                            org.slf4j;version="1.5",org.w3c.dom,org.xml.sax
                         </Import-Package>
                     </instructions>
                 </configuration>
@@ -82,6 +83,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
                     <formats>
                         <format>html</format>
@@ -93,6 +95,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2-beta-4</version>
                 <executions>
                     <execution>
                         <id>bundle-project-sources</id>
@@ -112,6 +115,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
                 <configuration>
                     <bottom>
                         <![CDATA[Copyright © {inceptionYear}-{currentYear} {organizationName}. All Rights Reserved.
@@ -139,6 +143,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
+                <version>2.0</version>
                 <configuration>
                     <locales>en</locales>
                 </configuration>
@@ -159,11 +164,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
+                <version>2.5</version>
                 <configuration>
                     <targetJdk>${java.version}</targetJdk>
                 </configuration>
@@ -172,11 +179,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.5</version>
             </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
+                <version>2.4</version>
             </plugin>
         </plugins>
     </reporting>
