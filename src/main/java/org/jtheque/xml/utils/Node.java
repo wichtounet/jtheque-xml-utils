@@ -19,7 +19,6 @@ package org.jtheque.xml.utils;
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.collections.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -29,9 +28,10 @@ import java.util.Collection;
  */
 public final class Node {
     private final String name;
-    private Collection<Node> childrens;
     private String text;
-    private Collection<NodeAttribute> attributes;
+
+    private Collection<Node> childrens = CollectionUtils.newList(5);
+    private Collection<NodeAttribute> attributes = CollectionUtils.newList(3);
 
     /**
      * Construct a new Node.
@@ -42,9 +42,6 @@ public final class Node {
         super();
 
         this.name = name;
-
-        childrens = new ArrayList<Node>(10);
-        attributes = new ArrayList<NodeAttribute>(10);
     }
 
     /**
@@ -54,13 +51,9 @@ public final class Node {
      * @param text The text of the node.
      */
     public Node(String name, String text) {
-        super();
+        this(name);
 
-        this.name = name;
         this.text = text;
-
-        childrens = new ArrayList<Node>(10);
-        attributes = new ArrayList<NodeAttribute>(10);
     }
 
     /**

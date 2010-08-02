@@ -22,7 +22,7 @@
     <issueManagement>
         <system>GitHub</system>
         <url>http://github.com/wichtounet/jtheque-xml-utils/issues</url>
-	</issueManagement>
+    </issueManagement>
 
     <scm>
         <url>http://github.com/wichtounet/jtheque-xml-utils</url>

@@ -1,6 +1,7 @@
 package org.jtheque.xml.utils.javax;
 
 import org.jtheque.utils.StringUtils;
+import org.jtheque.utils.collections.CollectionUtils;
 import org.jtheque.xml.utils.INodeLoader;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
@@ -8,7 +9,6 @@ import org.jtheque.xml.utils.NodeAttribute;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /*
@@ -35,7 +35,7 @@ import java.util.Collection;
 final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
     @Override
     public Collection<Node> resolveNodeStates(Collection<org.w3c.dom.Node> nodes) {
-        Collection<Node> nodeStates = new ArrayList<Node>(nodes.size());
+        Collection<Node> nodeStates = CollectionUtils.newList(nodes.size());
 
         for (org.w3c.dom.Node element : nodes) {
             nodeStates.add(resolve(element));
@@ -73,10 +73,10 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
             node.setText(text);
         }
 
-        if (element.getChildNodes().getLength() != 0){
+        if (element.getChildNodes().getLength() != 0) {
             NodeList childrenElements = element.getChildNodes();
 
-            Collection<Node> childrens = new ArrayList<Node>(childrenElements.getLength());
+            Collection<Node> childrens = CollectionUtils.newList(childrenElements.getLength());
 
             for (int i = 0; i < childrenElements.getLength(); i++) {
                 childrens.add(resolve(childrenElements.item(i)));
@@ -96,7 +96,7 @@ final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
         if (element.getAttributes() != null && element.getAttributes().getLength() != 0) {
             NamedNodeMap attributes = element.getAttributes();
 
-            Collection<NodeAttribute> nodeAttributes = new ArrayList<NodeAttribute>(attributes.getLength());
+            Collection<NodeAttribute> nodeAttributes = CollectionUtils.newList(attributes.getLength());
 
             for (int i = 0; i < attributes.getLength(); i++) {
                 nodeAttributes.add(new NodeAttribute(

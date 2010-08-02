@@ -1,6 +1,7 @@
 package org.jtheque.xml.utils.jdom;
 
 import org.jtheque.utils.StringUtils;
+import org.jtheque.utils.collections.CollectionUtils;
 import org.jtheque.xml.utils.INodeLoader;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
@@ -8,7 +9,6 @@ import org.jtheque.xml.utils.NodeAttribute;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /*
@@ -35,7 +35,7 @@ import java.util.Collection;
 public final class JDOMNodeLoader implements INodeLoader<Element> {
     @Override
     public Collection<Node> resolveNodeStates(Collection<Element> nodes) {
-        Collection<Node> nodeStates = new ArrayList<Node>(nodes.size());
+        Collection<Node> nodeStates = CollectionUtils.newList(nodes.size());
 
         for (Element element : nodes) {
             nodeStates.add(resolve(element));
@@ -76,7 +76,7 @@ public final class JDOMNodeLoader implements INodeLoader<Element> {
         if (!element.getChildren().isEmpty()) {
             Collection<Element> childrenElements = element.getChildren();
 
-            Collection<Node> childrens = new ArrayList<Node>(childrenElements.size());
+            Collection<Node> childrens = CollectionUtils.newList(childrenElements.size());
 
             for (Element childrenElement : childrenElements) {
                 childrens.add(resolve(childrenElement));
@@ -96,7 +96,7 @@ public final class JDOMNodeLoader implements INodeLoader<Element> {
         if (!element.getAttributes().isEmpty()) {
             Collection<Attribute> attributes = element.getAttributes();
 
-            Collection<NodeAttribute> nodeAttributes = new ArrayList<NodeAttribute>(attributes.size());
+            Collection<NodeAttribute> nodeAttributes = CollectionUtils.newList(attributes.size());
 
             for (Attribute attribute : attributes) {
                 nodeAttributes.add(new NodeAttribute(attribute.getName(), attribute.getValue()));
