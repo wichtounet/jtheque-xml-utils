@@ -1,6 +1,6 @@
 package org.jtheque.xml.utils.jdom;
 
-import org.jtheque.xml.utils.INodeSaver;
+import org.jtheque.xml.utils.NodeSaver;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
 
@@ -25,7 +25,7 @@ import org.jtheque.xml.utils.NodeAttribute;
  *
  * @author Baptiste Wicht
  */
-public final class JDOMNodeSaver implements INodeSaver<JDOMXMLWriter> {
+public final class JDOMNodeSaver implements NodeSaver<JDOMXMLWriter> {
     @Override
     public void writeNodes(JDOMXMLWriter writer, Iterable<Node> nodes) {
         for (Node node : nodes) {

@@ -1,6 +1,6 @@
 package org.jtheque.xml.utils.javax;
 
-import org.jtheque.xml.utils.IXMLWriter;
+import org.jtheque.xml.utils.XMLWriter;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
  *
  * @author Baptiste Wicht
  */
-public final class JavaxXMLWriter implements IXMLWriter<Node> {
+public final class JavaxXMLWriter implements XMLWriter<Node> {
     private final Document document;
 
     private Element current;

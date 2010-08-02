@@ -1,6 +1,6 @@
 package org.jtheque.xml.utils.jdom;
 
-import org.jtheque.xml.utils.IXMLWriter;
+import org.jtheque.xml.utils.XMLWriter;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -26,7 +26,7 @@ import org.jdom.Element;
  *
  * @author Baptiste Wicht
  */
-public final class JDOMXMLWriter implements IXMLWriter<Element> {
+public final class JDOMXMLWriter implements XMLWriter<Element> {
     private final Document document;
 
     private Element current;

@@ -17,7 +17,7 @@ package org.jtheque.xml.utils.jdom;
  */
 
 import org.jtheque.xml.utils.Entry;
-import org.jtheque.xml.utils.IXMLOverReader;
+import org.jtheque.xml.utils.XMLOverReader;
 import org.jtheque.xml.utils.XMLException;
 
 import org.jdom.Element;
@@ -32,7 +32,7 @@ import java.util.Deque;
  *
  * @author Baptiste Wicht
  */
-public final class JDOMXMLOverReader extends AbstractReader implements IXMLOverReader {
+public final class JDOMXMLOverReader extends AbstractReader implements XMLOverReader {
     private final Deque<Entry<Element>> elements = new ArrayDeque<Entry<Element>>();
 
     @Override

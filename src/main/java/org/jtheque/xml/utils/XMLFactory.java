@@ -29,14 +29,14 @@ public interface XMLFactory<T, K> {
      *
      * @return A new node loader.
      */
-    INodeLoader<T> newNodeLoader();
+    NodeLoader<T> newNodeLoader();
 
     /**
      * Create a new NodeSaver.
      *
      * @return A new node saver.
      */
-    INodeSaver<K> newNodeSaver();
+    NodeSaver<K> newNodeSaver();
 
     /**
      * Create a new Writer.
@@ -45,19 +45,19 @@ public interface XMLFactory<T, K> {
      *
      * @return A New XML Writer using the given root name as root element.
      */
-    IXMLWriter<T> newWriter(String root);
+    XMLWriter<T> newWriter(String root);
 
     /**
      * Create a new XML reader.
      *
      * @return A new XML reader.
      */
-    IXMLReader<T> newReader();
+    XMLReader<T> newReader();
 
     /**
      * Create a new XML Over Reader.
      *
      * @return A new XML Over reader.
      */
-    IXMLOverReader newOverReader();
+    XMLOverReader newOverReader();
 }

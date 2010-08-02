@@ -16,11 +16,11 @@ package org.jtheque.xml.utils.javax;
  * limitations under the License.
  */
 
-import org.jtheque.xml.utils.INodeLoader;
-import org.jtheque.xml.utils.INodeSaver;
-import org.jtheque.xml.utils.IXMLOverReader;
-import org.jtheque.xml.utils.IXMLReader;
-import org.jtheque.xml.utils.IXMLWriter;
+import org.jtheque.xml.utils.NodeLoader;
+import org.jtheque.xml.utils.NodeSaver;
+import org.jtheque.xml.utils.XMLOverReader;
+import org.jtheque.xml.utils.XMLReader;
+import org.jtheque.xml.utils.XMLWriter;
 import org.jtheque.xml.utils.XMLFactory;
 
 import org.w3c.dom.Node;
@@ -30,29 +30,29 @@ import org.w3c.dom.Node;
  *
  * @author Baptiste Wicht
  */
-public final class JavaxFactory implements XMLFactory<Node, IXMLWriter<Node>> {
+public final class JavaxFactory implements XMLFactory<Node, XMLWriter<Node>> {
     @Override
-    public INodeLoader<Node> newNodeLoader() {
+    public NodeLoader<Node> newNodeLoader() {
         return new JavaxNodeLoader();
     }
 
     @Override
-    public INodeSaver<IXMLWriter<Node>> newNodeSaver() {
+    public NodeSaver<XMLWriter<Node>> newNodeSaver() {
         return new JavaxNodeSaver();
     }
 
     @Override
-    public IXMLWriter<Node> newWriter(String root) {
+    public XMLWriter<Node> newWriter(String root) {
         return new JavaxXMLWriter(root);
     }
 
     @Override
-    public IXMLReader<Node> newReader() {
+    public XMLReader<Node> newReader() {
         return new JavaxXMLReader();
     }
 
     @Override
-    public IXMLOverReader newOverReader() {
+    public XMLOverReader newOverReader() {
         return new JavaxXMLOverReader();
     }
 }

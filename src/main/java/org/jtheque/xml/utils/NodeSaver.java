@@ -22,7 +22,7 @@ package org.jtheque.xml.utils;
  * @author Baptiste Wicht
  * @param <T> The type of writer.
  */
-public interface INodeSaver<T> {
+public interface NodeSaver<T> {
     /**
      * Write the given generic nodes into the given writer.
      *

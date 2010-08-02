@@ -24,7 +24,7 @@ import java.util.Collection;
  * @author Baptiste Wicht
  * @param <T> The type of element.
  */
-public interface IXMLReader<T> extends Reader {
+public interface XMLReader<T> extends Reader {
     /**
      * Return the root element of the reader.
      *

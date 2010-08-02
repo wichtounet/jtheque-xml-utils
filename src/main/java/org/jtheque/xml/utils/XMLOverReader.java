@@ -21,7 +21,7 @@ package org.jtheque.xml.utils;
  *
  * @author Baptiste Wicht
  */
-public interface IXMLOverReader extends Reader {
+public interface XMLOverReader extends Reader {
     /**
      * Read a node from the current element. The current element become the read node if there is one.
      *

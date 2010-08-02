@@ -30,7 +30,7 @@ import org.w3c.dom.Node;
  */
 public class XML {
     private static final XMLFactory<Element, JDOMXMLWriter> JDOM_FACTORY = new JDOMFactory();
-    private static final XMLFactory<Node, IXMLWriter<Node>> JAVA_FACTORY = new JavaxFactory();
+    private static final XMLFactory<Node, XMLWriter<Node>> JAVA_FACTORY = new JavaxFactory();
 
     /**
      * Utility class, not instantiable.
@@ -53,7 +53,7 @@ public class XML {
      *
      * @return A Java Factory.
      */
-    public static XMLFactory<Node, IXMLWriter<Node>> newJavaFactory() {
+    public static XMLFactory<Node, XMLWriter<Node>> newJavaFactory() {
         return JAVA_FACTORY;
     }
 }

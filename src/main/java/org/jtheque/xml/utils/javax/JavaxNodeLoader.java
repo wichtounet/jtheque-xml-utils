@@ -2,7 +2,7 @@ package org.jtheque.xml.utils.javax;
 
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.collections.CollectionUtils;
-import org.jtheque.xml.utils.INodeLoader;
+import org.jtheque.xml.utils.NodeLoader;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
 
@@ -32,7 +32,7 @@ import java.util.Collection;
  *
  * @author Baptiste Wicht
  */
-final class JavaxNodeLoader implements INodeLoader<org.w3c.dom.Node> {
+final class JavaxNodeLoader implements NodeLoader<org.w3c.dom.Node> {
     @Override
     public Collection<Node> resolveNodeStates(Collection<org.w3c.dom.Node> nodes) {
         Collection<Node> nodeStates = CollectionUtils.newList(nodes.size());

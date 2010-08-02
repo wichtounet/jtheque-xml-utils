@@ -24,7 +24,7 @@ import java.util.Collection;
  * @author Baptiste Wicht
  * @param <T> The type of node to resolve.
  */
-public interface INodeLoader<T> {
+public interface NodeLoader<T> {
     /**
      * Resolve the node states from the XML elements.
      *

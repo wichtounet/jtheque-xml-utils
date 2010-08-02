@@ -16,7 +16,7 @@ package org.jtheque.xml.utils.javax;
  * limitations under the License.
  */
 
-import org.jtheque.xml.utils.IXMLReader;
+import org.jtheque.xml.utils.XMLReader;
 import org.jtheque.xml.utils.XMLException;
 
 import org.w3c.dom.Element;
@@ -33,7 +33,7 @@ import java.util.Collection;
  *
  * @author Baptiste Wicht
  */
-public final class JavaxXMLReader extends AbstractReader implements IXMLReader<Node> {
+public final class JavaxXMLReader extends AbstractReader implements XMLReader<Node> {
     @Override
     public Element getRootElement() {
         if (getDocument() != null) {

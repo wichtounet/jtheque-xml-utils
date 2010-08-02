@@ -2,7 +2,7 @@ package org.jtheque.xml.utils.jdom;
 
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.collections.CollectionUtils;
-import org.jtheque.xml.utils.INodeLoader;
+import org.jtheque.xml.utils.NodeLoader;
 import org.jtheque.xml.utils.Node;
 import org.jtheque.xml.utils.NodeAttribute;
 
@@ -32,7 +32,7 @@ import java.util.Collection;
  *
  * @author Baptiste Wicht
  */
-public final class JDOMNodeLoader implements INodeLoader<Element> {
+public final class JDOMNodeLoader implements NodeLoader<Element> {
     @Override
     public Collection<Node> resolveNodeStates(Collection<Element> nodes) {
         Collection<Node> nodeStates = CollectionUtils.newList(nodes.size());

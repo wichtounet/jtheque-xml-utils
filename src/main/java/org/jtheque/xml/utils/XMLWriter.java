@@ -22,7 +22,7 @@ package org.jtheque.xml.utils;
  * @author Baptiste Wicht
  * @param <T> The type of element.
  */
-public interface IXMLWriter<T> {
+public interface XMLWriter<T> {
     /**
      * Add the element to the document and set the new element as the current element.
      *
