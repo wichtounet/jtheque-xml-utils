@@ -10,7 +10,7 @@
     <artifactId>org.jtheque.xml.utils</artifactId>
     <packaging>bundle</packaging>
     <name>JTheque XML Utils</name>
-    <version>1.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <url>http://www.jtheque.com/jtheque-xml-utils</url>
 
