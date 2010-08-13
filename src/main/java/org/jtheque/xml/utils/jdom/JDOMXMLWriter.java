@@ -86,7 +86,7 @@ public final class JDOMXMLWriter implements XMLWriter<Element> {
 
     @Override
     public void write(String filePath) {
-        XMLUtils.writeXml(document, filePath);
+        JDOMUtils.writeXml(document, filePath);
     }
 
     @Override

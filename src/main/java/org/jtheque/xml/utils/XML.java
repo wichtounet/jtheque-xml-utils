@@ -28,7 +28,7 @@ import org.w3c.dom.Node;
  *
  * @author Baptiste Wicht
  */
-public class XML {
+public final class XML {
     private static final XMLFactory<Element, JDOMXMLWriter> JDOM_FACTORY = new JDOMFactory();
     private static final XMLFactory<Node, XMLWriter<Node>> JAVA_FACTORY = new JavaxFactory();
 
@@ -36,7 +36,7 @@ public class XML {
      * Utility class, not instantiable.
      */
     private XML() {
-        super();
+        throw new AssertionError();
     }
 
     /**

@@ -1,5 +1,7 @@
 package org.jtheque.xml.utils;
 
+import org.jtheque.utils.annotations.Immutable;
+
 /*
  * Copyright JTheque (Baptiste Wicht)
  *
@@ -21,9 +23,10 @@ package org.jtheque.xml.utils;
  *
  * @author Baptiste Wicht
  */
+@Immutable
 public final class NodeAttribute {
-    private String key;
-    private String value;
+    private final String key;
+    private final String value;
 
     /**
      * Construct a new NodeAttribute.
@@ -48,29 +51,11 @@ public final class NodeAttribute {
     }
 
     /**
-     * Set the key of the attribute.
-     *
-     * @param key The key.
-     */
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    /**
      * Return the value of the attribute.
      *
      * @return The value.
      */
     public String getValue() {
         return value;
-    }
-
-    /**
-     * Set the value of the attribute.
-     *
-     * @param value The value.
-     */
-    public void setValue(String value) {
-        this.value = value;
     }
 }

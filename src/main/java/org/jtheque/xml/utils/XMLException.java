@@ -38,6 +38,8 @@ package org.jtheque.xml.utils;
  * @author Baptiste Wicht
  */
 public final class XMLException extends Exception {
+    private static final long serialVersionUID = 2402757415562781182L;
+
     /**
      * Construct a new XMLException.
      *

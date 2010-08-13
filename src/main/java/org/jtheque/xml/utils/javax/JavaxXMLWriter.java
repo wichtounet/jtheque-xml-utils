@@ -102,7 +102,7 @@ public final class JavaxXMLWriter implements XMLWriter<Node> {
 
     @Override
     public void write(String filePath) {
-        XMLUtils.writeXml(document, filePath);
+        JavaxUtils.writeXml(document, filePath);
     }
 
     @Override

@@ -10,9 +10,9 @@
     <artifactId>org.jtheque.xml.utils</artifactId>
     <packaging>bundle</packaging>
     <name>JTheque XML Utils</name>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
-    <url>http://github.com/wichtounet/jtheque-xml-utils</url>
+    <url>http://www.jtheque.com/jtheque-xml-utils</url>
 
     <ciManagement>
         <system>Hudson</system>
@@ -30,11 +30,6 @@
     </scm>
 
     <distributionManagement>
-        <site>
-            <id>bw-web-server</id>
-            <name>BW FTP Server</name>
-            <url>ftp://baptiste-wicht.com/jtheque/xml-utils</url>
-        </site>
         <repository>
             <id>Server-PC-releases</id>
             <name>Server-PC-releases</name>
@@ -245,8 +240,8 @@
             <organizationUrl>http://baptiste-wicht.developpez.com</organizationUrl>
 
             <roles>
-                <role>Administrateur</role>
-                <role>Développeur</role>
+                <role>Administrator</role>
+                <role>Developer</role>
             </roles>
 
             <timezone>0</timezone>

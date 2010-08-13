@@ -34,12 +34,12 @@ import java.io.OutputStream;
  *
  * @author Baptiste Wicht
  */
-final class XMLUtils {
+final class JDOMUtils {
     /**
      * This is an utility class, not instanciable.
      */
-    private XMLUtils() {
-        super();
+    private JDOMUtils() {
+        throw new AssertionError();
     }
 
     /**
@@ -60,7 +60,7 @@ final class XMLUtils {
                 fileOk = f.createNewFile();
             } catch (IOException e) {
                 fileOk = false;
-                LoggerFactory.getLogger(XMLUtils.class).error(e.getMessage(), e);
+                LoggerFactory.getLogger(JDOMUtils.class).error(e.getMessage(), e);
             }
         }
 
@@ -71,9 +71,9 @@ final class XMLUtils {
 
                 outputter.output(doc, stream);
             } catch (FileNotFoundException e) {
-                LoggerFactory.getLogger(XMLUtils.class).error(e.getMessage(), e);
+                LoggerFactory.getLogger(JDOMUtils.class).error(e.getMessage(), e);
             } catch (IOException e) {
-                LoggerFactory.getLogger(XMLUtils.class).error(e.getMessage(), e);
+                LoggerFactory.getLogger(JDOMUtils.class).error(e.getMessage(), e);
             } finally {
                 FileUtils.close(stream);
             }

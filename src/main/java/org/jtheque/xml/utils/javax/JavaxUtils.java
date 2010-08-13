@@ -37,12 +37,12 @@ import java.io.IOException;
  *
  * @author Baptiste Wicht
  */
-final class XMLUtils {
+final class JavaxUtils {
     /**
      * This is an utility class, not instanciable.
      */
-    private XMLUtils() {
-        super();
+    private JavaxUtils() {
+        throw new AssertionError();
     }
 
     /**
@@ -61,7 +61,7 @@ final class XMLUtils {
                 fileOk = f.createNewFile();
             } catch (IOException e) {
                 fileOk = false;
-                LoggerFactory.getLogger(XMLUtils.class).error(e.getMessage(), e);
+                LoggerFactory.getLogger(JavaxUtils.class).error(e.getMessage(), e);
             }
         }
 
@@ -78,9 +78,9 @@ final class XMLUtils {
                 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                 transformer.transform(source, result);
             } catch (TransformerConfigurationException e) {
-                LoggerFactory.getLogger(XMLUtils.class).error(e.getMessage(), e);
+                LoggerFactory.getLogger(JavaxUtils.class).error(e.getMessage(), e);
             } catch (TransformerException e) {
-                LoggerFactory.getLogger(XMLUtils.class).error(e.getMessage(), e);
+                LoggerFactory.getLogger(JavaxUtils.class).error(e.getMessage(), e);
             }
         }
     }
